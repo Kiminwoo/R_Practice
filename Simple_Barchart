@@ -1,0 +1,8 @@
+height <-c(9,15,20,6)
+#높이를 수치화 , 총 4개의 값들 
+name <- c("영업1팀","영업2팀","영업3팀","영업4팀")
+#4개의 변수 값ㄷ
+barplot(height,names.arg = name,main="부서별 영업 실적",
+        col=rainbow(length(height)),
+        xlab="부서",ylab="영업 실적(억원)")들
+# 바차트 (높이 , 막대개수 , 메인명 , 수치 값 대입 , x축 , y축 )
