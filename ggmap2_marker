@@ -1,0 +1,23 @@
+
+library(ggplot2)
+
+names<- c("1.도담삼봉/석문","2.구담/옥순봉","3.사인암","4.하선암","5.중선암","6.상선암")
+# 단양팔경 이름
+
+addr<- c("충청북도 단양군 매포읍 삼봉로","충청북도 단양군 단성면 월악로","충청북도 단양군 대강면 사인암2길","충청북도 단양군 단성면 선암계곡로","충청북도 단양군 단성면 선암계곡로","충청북도 단양군 선암계곡로")
+# 단양팔경 주소
+
+gc<-geocode(enc2utf8(addr))
+#단양팔경 주소지의 위도와 경도
+
+df<-data.frame(name=names,lon=gc$lon,lat=gc$lat)
+#단양팔경 이름, 경도와 위도에 대한 항목명을 각각 name,lon,lat으로 하는 데이터 프레임 
+
+cen <-c(mean(df$lon),mean(df$lat))
+#중심 좌표 계산, 데이터 프레임에 있는 모든 경도와 위도에 대한 평균치를 나타낸다.
+
+map<-get_googlemap(center=cen,maptype = "roadmap",zoom=11,marker=gc)
+#지도를 생성하는데 이때 zoom은 보이는 시각정도 
+
+ggmap(map)
+# 지도 출력
