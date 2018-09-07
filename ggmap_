@@ -1,0 +1,16 @@
+install.packages("ggmap")
+library(ggmap)
+# ggamp 패키지 설치 및 로딩 
+
+
+gc <- geocode(enc2utf8('서울'))
+# 한글 지역명을 utf8 형식으로 변환해서 위도와 경도로 변환 
+
+cen <-as.numeric(gc)
+#위도와 경도를 숫자 형식으로 변환
+
+map <-get_googlemap(center=cen)
+#위도와 경도를 중심으로 하는 지도 정보 반환
+
+ggmap(map)
+#지도 출력 
