@@ -1,0 +1,6 @@
+mag <- quakes$mag
+# 지진 강도 데이터 할당
+
+boxplot(mag , main="지진 발생 강도의 분포" , xlab="지진",ylab="발생 건수",col="black")
+
+# 박스플롯 출력 
