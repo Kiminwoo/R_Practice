@@ -1,0 +1,16 @@
+library(animation)
+ani.options(interval = 1)
+# 1초 간격의 애니메이션 시간 설정
+while(TRUE)
+  
+  
+{
+  y <-runif(100,0,1)
+  # 0~1 사이의 100개 난수 생성
+  
+  barplot(y,ylim = c(0,5),col=rainbow(100))
+  # 바차트 : Y축 ( 0~5 까지) 100개 무지개색의 막대생성
+  
+  ani.pause()
+  #애니메이션 설정 시간만큼 대기 
+}
