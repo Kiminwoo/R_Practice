@@ -1,0 +1,23 @@
+install.packages("png")
+library(png)
+ani.options(interval=0.5)
+#0.5초 간격의 애니메이션 시간 설정
+plot.new()
+#새로운 그래프 생성
+rect(0,0,1,1,col="white")
+#그래픽 출력 영역 지정 및 흰색 배경 출력
+for(i in 1:6) # 1~6까지 반복 실행
+{
+  img <- paste("C://Users//user//Documents//R/Animal",i,".png",sep="")
+  # 이미지 경로 설정 : Animal1~Animal6.png 파일명 지정 , sep="" : 문자열 끼리 연결할때 공백이 없음을 의미 한다.
+  
+  img <- readPNG(img)
+  # 이미지 파일 읽기 
+  
+  rasterImage(img,0,0,1,1)
+  #이미지 출력 , 이미지 파일명 , xleft , xright 
+  
+  ani.pause()
+  # 설정 시간 만큼 대기 
+}
+dev.off() # 출력 창을 닫음 
