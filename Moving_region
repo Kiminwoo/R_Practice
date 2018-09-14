@@ -1,0 +1,42 @@
+library(wordcloud)
+library(RColorBrewer)
+
+pal3 <- brewer.pal(8,"Dark2")
+
+# 팔레트 설정
+
+data1 <- read.csv(file.choose(), header = T)
+# csv파일을 선택해서 읽어온다
+
+head(data1)
+# 데이터 세트의 앞부분 읽어오기 
+
+data2 <- data1[data1$행정구역.시군구.별 !="전국",]
+# 전국을 제외한 데이터 불러오기 
+
+head(data2)
+# 데이터 세트의 앞 부분 읽어오기 
+
+x <- grep("구$",data2$행정구역.시군구.별)
+# oo구 와 같이 '구'로 끝나는 지역명
+
+data3 <- data2[-c(x),]
+
+
+head(data3)
+# '구'단위 지역의 행에 대한 데이터 제외 
+
+
+data4 <- data3[data3$순이동.명>0,]
+# 순이동.명 이 0 보다 큰 값을 data4에 저장시킨다 .
+# 이 의미는 이동 자체가 있는 것을 걸른다.
+
+word1 <- data4$행정구역.시군구.별
+# 행정구역,시군구,별을 가져오는데 지역을 의미한다.
+
+frequency <- data4$순이동.명
+# 순이동 하는 통계치를 frequency에 저장을 시킨다.
+
+wordcloud(word1,frequency,colors = pal3)
+
+# wordcloud를 사용해서 시각화를 해주는데 , 지역 , 빈도 , color지정 
