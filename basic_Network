@@ -1,0 +1,84 @@
+library(igraph)
+# install.packages("igraph")
+# igraph 패키지 설치 및 로드 
+
+star_1 <-graph(edges = NULL , n =NULL , directed = FALSE)
+# n (노드) 와 edges(연결) 이 없고 , 방향 (directed) 가 없는 igraph 생성 
+
+star_1 <- star_1 + vertex("A",shape="circle",size=30,color="yellow")
+# star_1 그래프에 "A" 노드 추가 , 모양은 원 , 크기는 30 , 색은 노란색
+
+star_1 <- star_1 +vertices("B","C","D","E","F",shape="circle",size=30)
+# star_1 그래프에 B,C,D,E,F 노드 추가 모양은 원 , 크기는 30
+
+plot(star_1)
+
+
+star_1 <- star_1+edge("A","B")
+# star_1 그래프에 노드 연결 ( A 와 B )
+star_1 <- star_1+edges("A","C","A","D","A","E","A","F")
+# star_1 그래프에 노드 연결 (A와C, A와D, A와E,A와F)
+
+#-------------------DEGREE ----------------------------
+
+degree(star_1,normalized = FALSE)
+#star_1 그래프의 연결정도 , normalized = 정규화여부
+degree(star_1,normalized = TRUE)
+#star_1 그래프의 연결정도 , normalized = 정규화여부
+
+star_max <-centr_degree_tmax(star_1)
+star_max
+centralization.degree(star_1,normalized = FALSE)$centralization/star_max
+# 연결 정도 중심화 
+# 연결이 한곳으로 집중되면 1에 가깝다
+
+
+# ------------------Closeness---------------------
+
+closeness(star_1 , normalized = FALSE)
+# 각 노드의 근접 중심성 
+
+closeness(star_1,normalized = TRUE)
+# 각 노드의 정규화된 근접 중심성 
+# A 는 모든 노드와 1단계로 연결되어 있기 때문에 1
+
+star_max2 <- centralization.closeness.tmax(star_1)
+# 근접 중심화의 최대값 
+centralization.closeness(star_1,normalized = FALSE)$centralization/star_max2
+# 정규화된 근접 중심화 
+# 한 노드에 연결이 집중되어 있음을 의미 
+
+#------------------Betweenness--------------------
+
+betweenness(star_1,normalized = FALSE)
+#각 노드의 비정규화된 중개 중심성 
+
+betweenness(star_1,normalized = TRUE)
+#각 노드의 정규화된 중개 중심성
+
+star_max3 <- centralization.betweenness.tmax(star_1)
+# 중개 중심화 최댓값 
+centralization.betweenness(star_1,normalized = FALSE)$centralization /star_max3
+# 정규화된 중개 중심화 
+
+#----------------------Density--------------------
+
+graph.density(star_1)
+# star_1 그래프에 대한 네트워크 밀도 
+
+#----------------------최단 경로 -----------------
+shortest.paths(star_1)
+# 모든 노드에서의 최단 경로를 뽑아줌.
+
+get.shortest.paths(star_1,"A")
+# A에서 갈 수 있는 모든 최단 경로를 뽑아줌
+# A , A-B , A-B-C , A-B-C-D, A-F-E,A-F
+
+get.shortest.paths(star_1,"A","C")
+# A --> C shortest path 
+
+get.shortest.paths(star_1,"A",c("C","E"))
+# A --> C and A --> E shortest paths
+
+average.path.length(star_1)
+# 임의의 두 노드 경로들의 평균 거리 
